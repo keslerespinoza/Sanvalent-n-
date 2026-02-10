@@ -30,22 +30,17 @@ margin-bottom:40px;
 }
 
 /* corazones */
+
 .corazon{
 position:absolute;
 font-size:45px;
-animation:flotar 6s linear infinite;
+bottom:-60px;
+animation:subir 8s linear forwards;
 }
 
-@keyframes flotar{
-0%{transform:translateY(100vh);}
-100%{transform:translateY(-120px);}
-}
-
-/* perritos estilo Snoopy */
-.perrito{
-position:absolute;
-font-size:40px;
-animation:flotar 8s linear infinite;
+@keyframes subir{
+0%{ transform: translateY(0); }
+100%{ transform: translateY(-120vh); }
 }
 
 /* botones */
@@ -80,28 +75,34 @@ flex-direction:column;
 justify-content:center;
 align-items:center;
 position:relative;
+text-align:center;
 }
 
 #menu2 h1{
 margin-bottom:20px;
 }
 
+/* imagen Snoopy */
+
+#snoopy{
+width:300px;
+margin-top:20px;
+z-index:2;
+}
+
 /* confetti */
 
 .confetti{
 position:absolute;
-width:18px;
-height:18px;
-animation:caer 4s linear infinite;
+width:20px;
+height:20px;
+top:-40px;
+animation:caer 6s linear forwards;
 }
 
 @keyframes caer{
-0%{transform:translateY(-100px);}
-100%{transform:translateY(100vh);}
-}
-
-img{
-width:260px;
+0%{ transform: translateY(0); }
+100%{ transform: translateY(120vh); }
 }
 
 </style>
@@ -126,14 +127,9 @@ width:260px;
 
 <h1>Gracias por aceptar ser mi San Valentín ❤️</h1>
 
-<img src="https://media.tenor.com/6X4R4Vx2j7QAAAAd/cat-happy.gif">
+<img id="snoopy" src="https://i.imgur.com/8Km9tLL.png">
 
 </div>
-
-<!-- musica -->
-<audio id="musica">
-<source src="https://cdn.pixabay.com/audio/2022/03/15/audio_0a7c6c63b1.mp3" type="audio/mp3">
-</audio>
 
 <script>
 
@@ -143,46 +139,35 @@ let botonNo = document.getElementById("no");
 let menu1 = document.getElementById("menu1");
 let menu2 = document.getElementById("menu2");
 
-let musica = document.getElementById("musica");
-
 let tamaño = 1;
 
-/* corazones grandes */
+/* corazones que suben completos */
 setInterval(()=>{
 let c = document.createElement("div");
 c.className="corazon";
 c.innerHTML="💖";
 c.style.left=Math.random()*100+"%";
 menu1.appendChild(c);
-setTimeout(()=>c.remove(),6000);
-},500);
 
-/* perritos tipo Snoopy */
-setInterval(()=>{
-let p = document.createElement("div");
-p.className="perrito";
-p.innerHTML="🐶";
-p.style.left=Math.random()*100+"%";
-menu1.appendChild(p);
-setTimeout(()=>p.remove(),8000);
-},1500);
+setTimeout(()=>c.remove(),8000);
+},600);
 
 
-/* confetti grande */
+/* confetti tipo nieve */
 function lanzarConfetti(){
 
 setInterval(()=>{
 let conf = document.createElement("div");
 conf.className="confetti";
 
-let colores=["red","blue","yellow","green","purple","orange"];
-conf.style.background = colores[Math.floor(Math.random()*6)];
+let colores=["red","blue","yellow","green","purple","orange","pink"];
+conf.style.background = colores[Math.floor(Math.random()*7)];
 
 conf.style.left=Math.random()*100+"%";
 
 menu2.appendChild(conf);
 
-setTimeout(()=>conf.remove(),4000);
+setTimeout(()=>conf.remove(),6000);
 
 },150);
 
@@ -196,13 +181,9 @@ botonSi.style.transform=`scale(${tamaño})`;
 
 /* botón SI */
 botonSi.onclick=()=>{
-
 menu1.style.display="none";
 menu2.style.display="flex";
-
-musica.play();
 lanzarConfetti();
-
 }
 
 </script>

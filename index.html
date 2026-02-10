@@ -5,13 +5,15 @@
 <title>Para Nathaly ❤️</title>
 
 <style>
+
 body{
 margin:0;
 font-family: Arial, sans-serif;
-text-align:center;
+overflow:hidden;
 }
 
 /* MENU 1 */
+
 #menu1{
 background:#ffc0cb;
 height:100vh;
@@ -19,6 +21,7 @@ display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
+position:relative;
 }
 
 #menu1 h1{
@@ -26,6 +29,19 @@ font-size:35px;
 margin-bottom:40px;
 }
 
+/* corazones flotando */
+.corazon{
+position:absolute;
+font-size:25px;
+animation:flotar 6s infinite linear;
+}
+
+@keyframes flotar{
+0%{transform:translateY(100vh);}
+100%{transform:translateY(-100px);}
+}
+
+/* botones */
 button{
 font-size:25px;
 padding:15px 40px;
@@ -47,6 +63,7 @@ color:white;
 }
 
 /* MENU 2 */
+
 #menu2{
 display:none;
 background:white;
@@ -54,13 +71,28 @@ height:100vh;
 flex-direction:column;
 justify-content:center;
 align-items:center;
+position:relative;
 }
 
 #menu2 h1{
-margin-bottom:30px;
+margin-bottom:20px;
 }
 
-/* pantalla final */
+/* confetti */
+.confetti{
+position:absolute;
+width:10px;
+height:10px;
+background:red;
+animation:caer 5s infinite linear;
+}
+
+@keyframes caer{
+0%{transform:translateY(-100px);}
+100%{transform:translateY(100vh);}
+}
+
+/* final */
 #final{
 display:none;
 background:black;
@@ -68,8 +100,9 @@ height:100vh;
 }
 
 img{
-width:250px;
+width:220px;
 }
+
 </style>
 </head>
 
@@ -91,12 +124,15 @@ width:250px;
 
 <img id="gato" src="https://media.tenor.com/6X4R4Vx2j7QAAAAd/cat-happy.gif">
 
-<img id="explosion" style="display:none;" 
-src="https://media.tenor.com/5L3cT1z3b0sAAAAd/explosion-boom.gif">
+<img id="tnt" style="display:none;" 
+src="https://media.tenor.com/7l4RkC2B8eEAAAAd/minecraft-tnt.gif">
+
 </div>
 
-<!-- FINAL -->
 <div id="final"></div>
+
+<!-- MUSICA -->
+<audio id="musica" src="https://files.catbox.moe/9l7h6c.mp3"></audio>
 
 <script>
 
@@ -107,28 +143,68 @@ let menu1 = document.getElementById("menu1");
 let menu2 = document.getElementById("menu2");
 
 let gato = document.getElementById("gato");
-let explosion = document.getElementById("explosion");
+let tnt = document.getElementById("tnt");
 let final = document.getElementById("final");
+
+let musica = document.getElementById("musica");
 
 let tamaño = 1;
 
-/* Botón NO hace crecer el SI */
-botonNo.onclick = () =>{
-tamaño += 0.4;
-botonSi.style.transform = `scale(${tamaño})`;
+/* corazones menú 1 */
+setInterval(()=>{
+let corazon = document.createElement("div");
+corazon.className="corazon";
+corazon.innerHTML="❤️";
+corazon.style.left=Math.random()*100+"%";
+menu1.appendChild(corazon);
+
+setTimeout(()=>corazon.remove(),6000);
+},600);
+
+
+/* confetti menú 2 */
+function confetti(){
+
+setInterval(()=>{
+let c = document.createElement("div");
+c.className="confetti";
+
+let colores=["red","blue","yellow","green","purple"];
+c.style.background = colores[Math.floor(Math.random()*5)];
+
+c.style.left=Math.random()*100+"%";
+
+menu2.appendChild(c);
+
+setTimeout(()=>c.remove(),5000);
+
+},200);
+
 }
 
-/* Botón SI cambia de menú */
-botonSi.onclick = () =>{
-menu1.style.display = "none";
-menu2.style.display = "flex";
 
-/* Después de 4 segundos */
+/* botón NO */
+botonNo.onclick=()=>{
+tamaño+=0.4;
+botonSi.style.transform=`scale(${tamaño})`;
+}
+
+/* botón SI */
+botonSi.onclick=()=>{
+
+menu1.style.display="none";
+menu2.style.display="flex";
+
+musica.play();
+confetti();
+
+/* explosión después de 4 segundos */
 setTimeout(()=>{
-gato.style.display="none";
-explosion.style.display="block";
 
-/* después de la explosión */
+gato.style.display="none";
+tnt.style.display="block";
+
+/* pantalla negra */
 setTimeout(()=>{
 menu2.style.display="none";
 final.style.display="block";

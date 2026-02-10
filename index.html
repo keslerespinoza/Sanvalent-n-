@@ -25,26 +25,34 @@ position:relative;
 }
 
 #menu1 h1{
-font-size:35px;
+font-size:36px;
 margin-bottom:40px;
 }
 
-/* corazones flotando */
+/* corazones */
 .corazon{
 position:absolute;
-font-size:25px;
-animation:flotar 6s infinite linear;
+font-size:45px;
+animation:flotar 6s linear infinite;
 }
 
 @keyframes flotar{
 0%{transform:translateY(100vh);}
-100%{transform:translateY(-100px);}
+100%{transform:translateY(-120px);}
+}
+
+/* perritos estilo Snoopy */
+.perrito{
+position:absolute;
+font-size:40px;
+animation:flotar 8s linear infinite;
 }
 
 /* botones */
+
 button{
-font-size:25px;
-padding:15px 40px;
+font-size:26px;
+padding:18px 45px;
 margin:20px;
 border:none;
 border-radius:15px;
@@ -79,12 +87,12 @@ margin-bottom:20px;
 }
 
 /* confetti */
+
 .confetti{
 position:absolute;
-width:10px;
-height:10px;
-background:red;
-animation:caer 5s infinite linear;
+width:18px;
+height:18px;
+animation:caer 4s linear infinite;
 }
 
 @keyframes caer{
@@ -92,15 +100,8 @@ animation:caer 5s infinite linear;
 100%{transform:translateY(100vh);}
 }
 
-/* final */
-#final{
-display:none;
-background:black;
-height:100vh;
-}
-
 img{
-width:220px;
+width:260px;
 }
 
 </style>
@@ -110,29 +111,29 @@ width:220px;
 
 <!-- MENU 1 -->
 <div id="menu1">
+
 <h1>Nathaly ¿quieres ser mi San Valentín? 💖</h1>
 
 <div>
 <button id="si">Sí 😻</button>
 <button id="no">No 😿</button>
 </div>
+
 </div>
 
 <!-- MENU 2 -->
 <div id="menu2">
+
 <h1>Gracias por aceptar ser mi San Valentín ❤️</h1>
 
-<img id="gato" src="https://media.tenor.com/6X4R4Vx2j7QAAAAd/cat-happy.gif">
-
-<img id="tnt" style="display:none;" 
-src="https://media.tenor.com/7l4RkC2B8eEAAAAd/minecraft-tnt.gif">
+<img src="https://media.tenor.com/6X4R4Vx2j7QAAAAd/cat-happy.gif">
 
 </div>
 
-<div id="final"></div>
-
-<!-- MUSICA -->
-<audio id="musica" src="https://files.catbox.moe/9l7h6c.mp3"></audio>
+<!-- musica -->
+<audio id="musica">
+<source src="https://cdn.pixabay.com/audio/2022/03/15/audio_0a7c6c63b1.mp3" type="audio/mp3">
+</audio>
 
 <script>
 
@@ -142,46 +143,50 @@ let botonNo = document.getElementById("no");
 let menu1 = document.getElementById("menu1");
 let menu2 = document.getElementById("menu2");
 
-let gato = document.getElementById("gato");
-let tnt = document.getElementById("tnt");
-let final = document.getElementById("final");
-
 let musica = document.getElementById("musica");
 
 let tamaño = 1;
 
-/* corazones menú 1 */
-setInterval(()=>{
-let corazon = document.createElement("div");
-corazon.className="corazon";
-corazon.innerHTML="❤️";
-corazon.style.left=Math.random()*100+"%";
-menu1.appendChild(corazon);
-
-setTimeout(()=>corazon.remove(),6000);
-},600);
-
-
-/* confetti menú 2 */
-function confetti(){
-
+/* corazones grandes */
 setInterval(()=>{
 let c = document.createElement("div");
-c.className="confetti";
-
-let colores=["red","blue","yellow","green","purple"];
-c.style.background = colores[Math.floor(Math.random()*5)];
-
+c.className="corazon";
+c.innerHTML="💖";
 c.style.left=Math.random()*100+"%";
+menu1.appendChild(c);
+setTimeout(()=>c.remove(),6000);
+},500);
 
-menu2.appendChild(c);
+/* perritos tipo Snoopy */
+setInterval(()=>{
+let p = document.createElement("div");
+p.className="perrito";
+p.innerHTML="🐶";
+p.style.left=Math.random()*100+"%";
+menu1.appendChild(p);
+setTimeout(()=>p.remove(),8000);
+},1500);
 
-setTimeout(()=>c.remove(),5000);
 
-},200);
+/* confetti grande */
+function lanzarConfetti(){
+
+setInterval(()=>{
+let conf = document.createElement("div");
+conf.className="confetti";
+
+let colores=["red","blue","yellow","green","purple","orange"];
+conf.style.background = colores[Math.floor(Math.random()*6)];
+
+conf.style.left=Math.random()*100+"%";
+
+menu2.appendChild(conf);
+
+setTimeout(()=>conf.remove(),4000);
+
+},150);
 
 }
-
 
 /* botón NO */
 botonNo.onclick=()=>{
@@ -196,21 +201,7 @@ menu1.style.display="none";
 menu2.style.display="flex";
 
 musica.play();
-confetti();
-
-/* explosión después de 4 segundos */
-setTimeout(()=>{
-
-gato.style.display="none";
-tnt.style.display="block";
-
-/* pantalla negra */
-setTimeout(()=>{
-menu2.style.display="none";
-final.style.display="block";
-},2000);
-
-},4000);
+lanzarConfetti();
 
 }
 

@@ -2,190 +2,144 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Para Nathaly ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>San Valentín</title>
 
 <style>
-
 body{
-margin:0;
-font-family: Arial, sans-serif;
-overflow:hidden;
+    margin:0;
+    font-family: Arial, sans-serif;
+    background:white;
+    overflow:hidden;
+    text-align:center;
 }
 
-/* MENU 1 */
-
-#menu1{
-background:#ffc0cb;
-height:100vh;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-position:relative;
+/* Pantallas */
+.pantalla{
+    position:absolute;
+    width:100%;
+    height:100%;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
 }
 
-#menu1 h1{
-font-size:36px;
-margin-bottom:40px;
+.oculto{
+    display:none;
 }
 
-/* corazones */
-
-.corazon{
-position:absolute;
-font-size:45px;
-bottom:-60px;
-animation:subir 8s linear forwards;
-}
-
-@keyframes subir{
-0%{ transform: translateY(0); }
-100%{ transform: translateY(-120vh); }
-}
-
-/* botones */
-
+/* Botones */
 button{
-font-size:26px;
-padding:18px 45px;
-margin:20px;
-border:none;
-border-radius:15px;
-cursor:pointer;
-transition:0.3s;
+    padding:15px 30px;
+    margin:10px;
+    font-size:20px;
+    border:none;
+    border-radius:15px;
+    cursor:pointer;
 }
 
 #si{
-background:#ff4d88;
-color:white;
+    background:#ff4d6d;
+    color:white;
+    transition:0.3s;
 }
 
 #no{
-background:#555;
-color:white;
+    background:gray;
+    color:white;
 }
 
-/* MENU 2 */
-
-#menu2{
-display:none;
-background:white;
-height:100vh;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-position:relative;
-text-align:center;
-}
-
-#menu2 h1{
-margin-bottom:20px;
-}
-
-/* imagen Snoopy */
-
-#snoopy{
-width:300px;
-margin-top:20px;
-z-index:2;
-}
-
-/* confetti */
-
-.confetti{
-position:absolute;
-width:20px;
-height:20px;
-top:-40px;
-animation:caer 6s linear forwards;
+/* Confeti */
+.confeti{
+    position:fixed;
+    width:12px;
+    height:12px;
+    top:-20px;
+    animation:caer linear infinite;
 }
 
 @keyframes caer{
-0%{ transform: translateY(0); }
-100%{ transform: translateY(120vh); }
+    to{
+        transform:translateY(110vh);
+    }
 }
 
+/* Corazones esquinas */
+.corazon{
+    position:absolute;
+    font-size:80px;
+    opacity:0.8;
+}
+
+.esq1{ top:20px; left:20px; transform:rotate(-20deg);}
+.esq2{ top:20px; right:20px; transform:rotate(15deg);}
+.esq3{ bottom:20px; left:20px; transform:rotate(15deg);}
+.esq4{ bottom:20px; right:20px; transform:rotate(-15deg);}
+
+.peq{
+    font-size:55px;
+}
 </style>
 </head>
 
 <body>
 
-<!-- MENU 1 -->
-<div id="menu1">
+<!-- Pantalla 1 -->
+<div id="menu1" class="pantalla">
+    <h1>Nathaly 💖<br>¿Quieres ser mi San Valentín?</h1>
 
-<h1>Nathaly ¿quieres ser mi San Valentín? 💖</h1>
-
-<div>
-<button id="si">Sí 😻</button>
-<button id="no">No 😿</button>
+    <div>
+        <button id="si" onclick="aceptar()">Sí</button>
+        <button id="no" onclick="crecer()">No</button>
+    </div>
 </div>
 
-</div>
+<!-- Pantalla 2 -->
+<div id="menu2" class="pantalla oculto">
 
-<!-- MENU 2 -->
-<div id="menu2">
+    <!-- Corazones fondo -->
+    <div class="corazon esq1">💗</div>
+    <div class="corazon esq2 peq">🫶</div>
+    <div class="corazon esq3 peq">💗</div>
+    <div class="corazon esq4">🫶</div>
 
-<h1>Gracias por aceptar ser mi San Valentín ❤️</h1>
-
-<img id="snoopy" src="https://i.imgur.com/8Km9tLL.png">
-
+    <h1>Gracias por aceptar ser mi San Valentín ❤️</h1>
 </div>
 
 <script>
-
-let botonSi = document.getElementById("si");
-let botonNo = document.getElementById("no");
-
-let menu1 = document.getElementById("menu1");
-let menu2 = document.getElementById("menu2");
-
 let tamaño = 1;
 
-/* corazones que suben completos */
-setInterval(()=>{
-let c = document.createElement("div");
-c.className="corazon";
-c.innerHTML="💖";
-c.style.left=Math.random()*100+"%";
-menu1.appendChild(c);
-
-setTimeout(()=>c.remove(),8000);
-},600);
-
-
-/* confetti tipo nieve */
-function lanzarConfetti(){
-
-setInterval(()=>{
-let conf = document.createElement("div");
-conf.className="confetti";
-
-let colores=["red","blue","yellow","green","purple","orange","pink"];
-conf.style.background = colores[Math.floor(Math.random()*7)];
-
-conf.style.left=Math.random()*100+"%";
-
-menu2.appendChild(conf);
-
-setTimeout(()=>conf.remove(),6000);
-
-},150);
-
+function crecer(){
+    tamaño += 0.4;
+    document.getElementById("si").style.transform = `scale(${tamaño})`;
 }
 
-/* botón NO */
-botonNo.onclick=()=>{
-tamaño+=0.4;
-botonSi.style.transform=`scale(${tamaño})`;
+function aceptar(){
+    document.getElementById("menu1").classList.add("oculto");
+    document.getElementById("menu2").classList.remove("oculto");
+    crearConfeti();
 }
 
-/* botón SI */
-botonSi.onclick=()=>{
-menu1.style.display="none";
-menu2.style.display="flex";
-lanzarConfetti();
+/* Confeti */
+function crearConfeti(){
+    for(let i=0;i<120;i++){
+
+        let confeti = document.createElement("div");
+        confeti.classList.add("confeti");
+
+        confeti.style.left = Math.random()*100 + "vw";
+        confeti.style.background = colores();
+        confeti.style.animationDuration = (Math.random()*3 + 3)+"s";
+
+        document.body.appendChild(confeti);
+    }
 }
 
+function colores(){
+    let lista = ["red","blue","green","purple","orange","pink"];
+    return lista[Math.floor(Math.random()*lista.length)];
+}
 </script>
 
 </body>

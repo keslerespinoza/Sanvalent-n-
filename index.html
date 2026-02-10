@@ -1,94 +1,144 @@
-‎<!DOCTYPE html>
-‎<html lang="es">
-‎<head>
-‎<meta charset="UTF-8">
-‎<title>Para Nathaly ❤️</title>
-‎
-‎<style>
-‎    body {
-‎        font-family: Arial, sans-serif;
-‎        text-align: center;
-‎        background: #ffe6f0;
-‎        overflow: hidden;
-‎    }
-‎
-‎    h1 {
-‎        margin-top: 100px;
-‎        font-size: 40px;
-‎    }
-‎
-‎    button {
-‎        padding: 15px 30px;
-‎        font-size: 20px;
-‎        margin: 20px;
-‎        border: none;
-‎        border-radius: 10px;
-‎        cursor: pointer;
-‎        transition: 0.3s;
-‎    }
-‎
-‎    #si {
-‎        background-color: #ff4d88;
-‎        color: white;
-‎    }
-‎
-‎    #no {
-‎        background-color: #999;
-‎        color: white;
-‎    }
-‎
-‎    #gatitos {
-‎        display: none;
-‎        margin-top: 30px;
-‎    }
-‎
-‎    img {
-‎        width: 200px;
-‎        margin: 10px;
-‎        border-radius: 15px;
-‎    }
-‎</style>
-‎</head>
-‎
-‎<body>
-‎
-‎<h1>Nathaly, ¿quieres ser mi San Valentín? 💖</h1>
-‎
-‎<button id="si">Sí 😻</button>
-‎<button id="no">No 😿</button>
-‎
-‎<div id="gatitos">
-‎    <h2>Gracias por decir que sí ❤️</h2>
-‎    <p>Te quiero muchísimo 🥰</p>
-‎
-‎    <!-- Gatitos -->
-‎    <img src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif">
-‎    <img src="https://media.giphy.com/media/mlvseq9yvZhba/giphy.gif">
-‎    <img src="https://media.giphy.com/media/13borq7Zo2kulO/giphy.gif">
-‎</div>
-‎
-‎<script>
-‎
-‎let botonSi = document.getElementById("si");
-‎let botonNo = document.getElementById("no");
-‎let gatitos = document.getElementById("gatitos");
-‎
-‎let tamaño = 1;
-‎
-‎botonNo.addEventListener("click", () => {
-‎    tamaño += 0.5;
-‎    botonSi.style.transform = `scale(${tamaño})`;
-‎});
-‎
-‎botonSi.addEventListener("click", () => {
-‎    document.querySelector("h1").style.display = "none";
-‎    botonSi.style.display = "none";
-‎    botonNo.style.display = "none";
-‎    gatitos.style.display = "block";
-‎});
-‎
-‎</script>
-‎
-‎</body>
-‎</html>
-‎
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Para Nathaly ❤️</title>
+
+<style>
+body{
+margin:0;
+font-family: Arial, sans-serif;
+text-align:center;
+}
+
+/* MENU 1 */
+#menu1{
+background:#ffc0cb;
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+}
+
+#menu1 h1{
+font-size:35px;
+margin-bottom:40px;
+}
+
+button{
+font-size:25px;
+padding:15px 40px;
+margin:20px;
+border:none;
+border-radius:15px;
+cursor:pointer;
+transition:0.3s;
+}
+
+#si{
+background:#ff4d88;
+color:white;
+}
+
+#no{
+background:#555;
+color:white;
+}
+
+/* MENU 2 */
+#menu2{
+display:none;
+background:white;
+height:100vh;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+}
+
+#menu2 h1{
+margin-bottom:30px;
+}
+
+/* pantalla final */
+#final{
+display:none;
+background:black;
+height:100vh;
+}
+
+img{
+width:250px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- MENU 1 -->
+<div id="menu1">
+<h1>Nathaly ¿quieres ser mi San Valentín? 💖</h1>
+
+<div>
+<button id="si">Sí 😻</button>
+<button id="no">No 😿</button>
+</div>
+</div>
+
+<!-- MENU 2 -->
+<div id="menu2">
+<h1>Gracias por aceptar ser mi San Valentín ❤️</h1>
+
+<img id="gato" src="https://media.tenor.com/6X4R4Vx2j7QAAAAd/cat-happy.gif">
+
+<img id="explosion" style="display:none;" 
+src="https://media.tenor.com/5L3cT1z3b0sAAAAd/explosion-boom.gif">
+</div>
+
+<!-- FINAL -->
+<div id="final"></div>
+
+<script>
+
+let botonSi = document.getElementById("si");
+let botonNo = document.getElementById("no");
+
+let menu1 = document.getElementById("menu1");
+let menu2 = document.getElementById("menu2");
+
+let gato = document.getElementById("gato");
+let explosion = document.getElementById("explosion");
+let final = document.getElementById("final");
+
+let tamaño = 1;
+
+/* Botón NO hace crecer el SI */
+botonNo.onclick = () =>{
+tamaño += 0.4;
+botonSi.style.transform = `scale(${tamaño})`;
+}
+
+/* Botón SI cambia de menú */
+botonSi.onclick = () =>{
+menu1.style.display = "none";
+menu2.style.display = "flex";
+
+/* Después de 4 segundos */
+setTimeout(()=>{
+gato.style.display="none";
+explosion.style.display="block";
+
+/* después de la explosión */
+setTimeout(()=>{
+menu2.style.display="none";
+final.style.display="block";
+},2000);
+
+},4000);
+
+}
+
+</script>
+
+</body>
+</html>

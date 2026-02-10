@@ -1,0 +1,94 @@
+‎<!DOCTYPE html>
+‎<html lang="es">
+‎<head>
+‎<meta charset="UTF-8">
+‎<title>Para Nathaly ❤️</title>
+‎
+‎<style>
+‎    body {
+‎        font-family: Arial, sans-serif;
+‎        text-align: center;
+‎        background: #ffe6f0;
+‎        overflow: hidden;
+‎    }
+‎
+‎    h1 {
+‎        margin-top: 100px;
+‎        font-size: 40px;
+‎    }
+‎
+‎    button {
+‎        padding: 15px 30px;
+‎        font-size: 20px;
+‎        margin: 20px;
+‎        border: none;
+‎        border-radius: 10px;
+‎        cursor: pointer;
+‎        transition: 0.3s;
+‎    }
+‎
+‎    #si {
+‎        background-color: #ff4d88;
+‎        color: white;
+‎    }
+‎
+‎    #no {
+‎        background-color: #999;
+‎        color: white;
+‎    }
+‎
+‎    #gatitos {
+‎        display: none;
+‎        margin-top: 30px;
+‎    }
+‎
+‎    img {
+‎        width: 200px;
+‎        margin: 10px;
+‎        border-radius: 15px;
+‎    }
+‎</style>
+‎</head>
+‎
+‎<body>
+‎
+‎<h1>Nathaly, ¿quieres ser mi San Valentín? 💖</h1>
+‎
+‎<button id="si">Sí 😻</button>
+‎<button id="no">No 😿</button>
+‎
+‎<div id="gatitos">
+‎    <h2>Gracias por decir que sí ❤️</h2>
+‎    <p>Te quiero muchísimo 🥰</p>
+‎
+‎    <!-- Gatitos -->
+‎    <img src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif">
+‎    <img src="https://media.giphy.com/media/mlvseq9yvZhba/giphy.gif">
+‎    <img src="https://media.giphy.com/media/13borq7Zo2kulO/giphy.gif">
+‎</div>
+‎
+‎<script>
+‎
+‎let botonSi = document.getElementById("si");
+‎let botonNo = document.getElementById("no");
+‎let gatitos = document.getElementById("gatitos");
+‎
+‎let tamaño = 1;
+‎
+‎botonNo.addEventListener("click", () => {
+‎    tamaño += 0.5;
+‎    botonSi.style.transform = `scale(${tamaño})`;
+‎});
+‎
+‎botonSi.addEventListener("click", () => {
+‎    document.querySelector("h1").style.display = "none";
+‎    botonSi.style.display = "none";
+‎    botonNo.style.display = "none";
+‎    gatitos.style.display = "block";
+‎});
+‎
+‎</script>
+‎
+‎</body>
+‎</html>
+‎
